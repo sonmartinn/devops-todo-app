@@ -13,7 +13,6 @@ pipeline {
     tools {
         dockerTool 'docker'
     }
-
     stages {
         // stage("build and test") {
         //     steps {
@@ -32,14 +31,22 @@ pipeline {
         // }
         stage("deploy") {
             steps {
-                withBuildConfiguration {
-                    sshagent(credentials: [SSH_ID_REF]) {
+                // withBuildConfiguration {
+                //     sshagent(credentials: [SSH_ID_REF]) {
+                //         // sh "ssh -tt -vvv root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com"
+                //         // sh "ssh -tt -vvv root@ec2-18-142-231-213.ap-southeast-1.compute.amazonaws.com"
+                //         sh "ssh -tt -vvv ec2-3-27-30-249.ap-southeast-2.compute.amazonaws.com"
+                //         sh "docker pull sonmartin/devops-todo-apps:0.0.1"
+                //         sh "docker run -p 8000:8000 sonmartin/devops-todo-apps:0.0.1"
+                //     }
+                // }
+                sshagent(credentials: [SSH_ID_REF]) {
                         // sh "ssh -tt -vvv root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com"
-                        sh "ssh -tt -vvv root@ec2-18-142-231-213.ap-southeast-1.compute.amazonaws.com"
+                        // sh "ssh -tt -vvv root@ec2-18-142-231-213.ap-southeast-1.compute.amazonaws.com"
+                        sh "ssh -tt -vvv ec2-54-252-190-112.ap-southeast-2.compute.amazonaws.com"
                         sh "docker pull sonmartin/devops-todo-apps:0.0.1"
                         sh "docker run -p 8000:8000 sonmartin/devops-todo-apps:0.0.1"
                     }
-                }
             }
         }
     }

@@ -17,7 +17,8 @@ pipeline {
     stages {
         stage("build and test") {
             steps {
-                sh 'npm install'  // ví dụ: cài đặt các phụ thuộc npm
+                sh 'npm install'    // ví dụ: cài đặt các phụ thuộc npm
+                sh 'node app.js'
                 sh 'npm test'     // ví dụ: chạy các bài kiểm thử
             }
         }

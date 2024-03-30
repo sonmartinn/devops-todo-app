@@ -3,7 +3,7 @@
 import groovy.transform.Field
 
 @Field
-String DOCKER_USER_REF = 'sonmartin'
+String DOCKER_USER_REF = 'v-docker-hub'
 @Field
 String SSH_ID_REF = 'ssh-credentials-id'
 

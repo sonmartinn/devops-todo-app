@@ -17,23 +17,23 @@ pipeline {
     stages {
         stage("build and test") {
             steps {
-                // TODO here
+                sh 'npm install'  // ví dụ: cài đặt các phụ thuộc npm
+                sh 'npm test'     // ví dụ: chạy các bài kiểm thử
             }
         }
         stage("Docker login and push docker image") {
             steps {
                 withBuildConfiguration {
-                    // TODO here
+                    sh "docker build -t sonmartin/devops-todo-apps:0.0.1 ."
+                    sh "docker push sonmartin/devops-todo-apps:0.0.1"
                 }
             }
         }
         stage("deploy") {
             steps {
                 withBuildConfiguration {
-                    sshagent(credentials: [SSH_ID_REF]) {
-                        sh '''
-                            // TODO here
-                        '''
+                    sshagent(credentials: [ssh-credentials-id]) {
+                        sh "ssh -o StrictHostKeyChecking=no root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com"
                     }
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
 }
 
 void withBuildConfiguration(Closure body) {
-    withCredentials([usernamePassword(credentialsId: DOCKER_USER_REF, usernameVariable: 'repository_username', passwordVariable: 'repository_password')]) {
+    withCredentials([usernamePassword(credentialsId: v-docker-hub, usernameVariable: 'repository_username', passwordVariable: 'repository_password')]) {
         body()
     }
 }

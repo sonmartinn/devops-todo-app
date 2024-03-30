@@ -3,9 +3,9 @@
 import groovy.transform.Field
 
 @Field
-String DOCKER_USER_REF = '<DOCKERHUB_ID_PLACEHOLDER>'
+String DOCKER_USER_REF = 'v-docker-hub'
 @Field
-String SSH_ID_REF = '<SSH_ID_PLACEHOLDER>'
+String SSH_ID_REF = 'ssh-credentials-id'
 
 pipeline {
     agent any
@@ -33,7 +33,7 @@ pipeline {
         stage("deploy") {
             steps {
                 withBuildConfiguration {
-                    sshagent(credentials: [ssh-credentials-id]) {
+                    sshagent(credentials: [SSH_ID_REF]) {
                         sh "ssh -o StrictHostKeyChecking=no root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com"
                     }
                 }
@@ -43,7 +43,7 @@ pipeline {
 }
 
 void withBuildConfiguration(Closure body) {
-    withCredentials([usernamePassword(credentialsId: v-docker-hub, usernameVariable: 'repository_username', passwordVariable: 'repository_password')]) {
+    withCredentials([usernamePassword(credentialsId: DOCKER_USER_REF, usernameVariable: 'repository_username', passwordVariable: 'repository_password')]) {
         body()
     }
 }

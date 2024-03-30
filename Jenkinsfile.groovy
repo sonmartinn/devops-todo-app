@@ -22,14 +22,14 @@ pipeline {
         //         // sh 'npm test'     // ví dụ: chạy các bài kiểm thử
         //     }
         // }
-        stage("Docker login and push docker image") {
-            steps {
-                withBuildConfiguration {
-                    sh "docker build -t sonmartin/devops-todo-apps:0.0.2 ."
-                    sh "docker push sonmartin/devops-todo-apps:0.0.2"
-                }
-            }
-        }
+        // stage("Docker login and push docker image") {
+        //     steps {
+        //         withBuildConfiguration {
+        //             sh "docker build -t sonmartin/devops-todo-apps:0.0.2 ."
+        //             sh "docker push sonmartin/devops-todo-apps:0.0.2"
+        //         }
+        //     }
+        // }
         stage("deploy") {
             steps {
                 withBuildConfiguration {

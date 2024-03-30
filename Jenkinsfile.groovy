@@ -34,7 +34,8 @@ pipeline {
             steps {
                 withBuildConfiguration {
                     sshagent(credentials: [SSH_ID_REF]) {
-                        sh "ssh -tt -vvv root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com"
+                        // sh "ssh -tt -vvv root@ec2-18-141-234-249.ap-southeast-1.compute.amazonaws.com"
+                        sh "ssh -tt -vvv root@ec2-18-142-231-213.ap-southeast-1.compute.amazonaws.com"
                         sh "docker pull sonmartin/devops-todo-apps:0.0.1"
                         sh "docker run -p 8000:8000 sonmartin/devops-todo-apps:0.0.1"
                     }

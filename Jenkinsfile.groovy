@@ -40,7 +40,7 @@ pipeline {
                         // sh "docker pull sonmartin/devops-todo-apps:0.0.1"
                         // sh "docker run -p 8000:8000 sonmartin/devops-todo-apps:0.0.1"
                         sh '''
-                        docker run -d --rm --name todo-app-sontrung -p 8000:8000 sonmartin/devops-todo-apps:0.0.2
+                        docker run -d --rm --name todo-app-sontrung -p 8060:8000 sonmartin/devops-todo-apps:0.0.2
                         docker ps
                         '''
                     }

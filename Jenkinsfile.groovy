@@ -21,9 +21,13 @@ pipeline {
         }
         stage("Docker login and push docker image") {
             steps {
-                withBuildConfiguration {
-                    sh 'docker login -u "$repository_username" -p "$repository_password"'
-                    sh "docker push sonmartin/devops-todo-apps:0.0.2"
+                // withBuildConfiguration {
+                //     sh 'docker login -u "$repository_username" -p "$repository_password"'
+                //     sh "docker push sonmartin/devops-todo-apps:0.0.2"
+                // }
+                withCredentials([usernamePassword(credentialsId: 'v-docker-hub', usernameVariable: 'USER', passwordVariable: 'PASSWD')]) {
+                    sh 'docker login -u "$USER" -p "$PASSWD"'
+                    sh 'docker push sonmartin/devops-todo-apps:0.0.2'
                 }
             }
         }

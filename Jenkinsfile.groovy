@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sshagent(credentials: [SSH_ID_REF]) {
                         sh '''
-                        ssh -o StrictHostKeyChecking=no root@ec2-18-143-167-76.ap-southeast-1.compute.amazonaws.com
+                        ssh -o StrictHostKeyChecking=no ec2-18-142-136-126.ap-southeast-1.compute.amazonaws.com
                         "docker run -d --rm --name todo-app-sontrung -p 8060:8000 sonmartin/devops-todo-apps:0.0.2"
                         '''
                     }
